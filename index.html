@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="description" content="Арена Урал" />
+    <meta name="keywords" content="" />
+    <title>Арена Урал</title>
+    <!-- Favicons -->
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon-precomposed" sizes="180x180" href="favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
+    <link rel="manifest" href="favicons/site.webmanifest">
+    <link rel="mask-icon" href="favicons/safari-pinned-tab.svg" color="#000000">
+    <meta name="msapplication-TileColor" content="#2d89ef">
+    <meta name="msapplication-config" content="favicons/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+
+    <!-- шрифты -->
+    <link rel="preload" href="fonts/Inter-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="preload" href="fonts/Inter-Medium.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="preload" href="fonts/Inter-SemiBold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="preload" href="fonts/Code-Pro-LC.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="preload" href="fonts/Code-Pro-Bold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="preload" href="fonts/Code-Pro-Black-LC.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="vendors/swiper/swiper-bundle.min.css">
+    <link rel="stylesheet" href="vendors/select2/select2.min.css">
+    <link rel="stylesheet" href="vendors/animate/aos.min.css">
+    <link rel="stylesheet" href="vendors/fancybox/jquery.fancybox.min.css">
+    <link rel="stylesheet" href="vendors/plyr/plyr.css">
+    <link rel="stylesheet" href="css/common.css?15">
+</head>
+<!-- Для бэкендера: в секциях со слайдером, где, возможно, блоки будут выводиться циклом, есть data-aos-delay="" с  разными значениями. 
+    Например: .events_slider у .events_item, и т.д. -->
+<!-- Блоки .events_item и .news_item, такие же как  и в файлах events.html и news.html, но у них разыне обертки-->
+<!-- Для главной к body добавила класс page_home, на других стр его нет -->
+
+<body class='page_home'>
+    <header class='header'>
+        <div class="container">
+            <div class="header_row">
+                <a href="/" class="logo">
+                    <img src="imgs/logo.svg" alt="">
+                    <img src="imgs/logo_white.svg" alt="">
+                </a>
+                <nav class='menu'>
+                    <ul>
+                        <li><a href="events.html">Мероприятия</a></li>
+                        <li><a href="training.html">Обучение</a></li>
+                        <li><a href="about.html">О компании</a></li>
+                        <li><a href="#">Документы</a></li>
+                    </ul>
+                </nav>
+                <a href="#" class='btn btn_small'>Личный кабинет</a>
+                <div class='mobile_menu_btn'><span></span></div>
+            </div>
+            <div class='mobile_menu'>
+                <nav class='menu'>
+                    <ul>
+                        <li><a href="events.html">Мероприятия</a></li>
+                        <li><a href="training.html">Обучение</a></li>
+                        <li><a href="about.html">О компании</a></li>
+                        <li><a href="#">Документы</a></li>
+                    </ul>
+                </nav>
+                <div class='social_list'>
+                    <a href="#">
+                        <img src="imgs/telegram.svg" alt="">
+                    </a>
+                    <a href="#">
+                        <img src="imgs/vk.svg" alt="">
+                    </a>
+                    <a href="#">
+                        <img src="imgs/whatsap.svg" alt="">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class='body_content'>
+        <main>
+            <section class='home'>
+                <div class='home_wrapper bg_svg_block' data-aos="load">
+                    <svg class='bg_svg' width="100%" height="100%" viewBox="0 0 1945 1268" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="1311" cy="634" r="633" stroke-width="2" stroke-miterlimit="10" class="svg-elem-1">
+                        </circle>
+                        <circle cx="1311" cy="634" r="216" stroke-width="2" stroke-miterlimit="10" class="svg-elem-2">
+                        </circle>
+                        <circle cx="340" cy="634" r="339" stroke-width="2" stroke-miterlimit="10" class="svg-elem-3">
+                        </circle>
+                        <circle cx="340" cy="634" r="216" stroke-width="2" stroke-miterlimit="10" class="svg-elem-4">
+                        </circle>
+                        <path d="M557 628L1095 628" stroke-width="2" stroke-miterlimit="10" class="svg-elem-5">
+                        </path>
+                    </svg>
+                    <svg class='bg_svg_two' width="531" height="738" viewBox="0 0 531 738" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="265.537" cy="265.147" r="264.537" transform="rotate(-90 265.537 265.147)"
+                            stroke-width="0.835821" stroke-miterlimit="10" class="svg-elem-1"></circle>
+                        <circle cx="265.269" cy="265.147" r="90.2687" transform="rotate(-90 265.269 265.147)"
+                            stroke-width="0.835821" stroke-miterlimit="10" class="svg-elem-2"></circle>
+                        <ellipse cx="265.5" cy="633.11" rx="103.5" ry="103.5" transform="rotate(-90 265.5 633.11)"
+                            stroke-width="0.835821" stroke-miterlimit="10" class="svg-elem-3"></ellipse>
+                        <ellipse cx="265.5" cy="633.11" rx="52.5" ry="52.5" transform="rotate(-90 265.5 633.11)"
+                            stroke-width="0.835821" stroke-miterlimit="10" class="svg-elem-4"></ellipse>
+                        <path d="M265 580.252L265 355.416" stroke-width="0.835821" stroke-miterlimit="10"
+                            class="svg-elem-5">
+                        </path>
+                    </svg>
+
+                    <div class="container">
+                        <div class='home_row'>
+                            <div class='home_left home_image' id="home_left" data-aos="fade-up-right">
+                                <img src="imgs/people1.png" alt="">
+                            </div>
+                            <div class='home_center' data-aos="zoom-in-up">
+                                <h1><span>Присоединяйтесь к нашей</span> команде</h1>
+                                <div class='home_btn_wrapper'>
+                                    <a href="#" class='home_btn'>
+                                        <span class='font_code'>Стать стюардом</span>
+                                        <span>
+                                            контрольно - распорядительная
+                                            служба
+                                        </span>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class='home_right home_image' id="home_right" data-aos="fade-up-left">
+                                <img src="imgs/people2.png" alt="">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class='lines_bottom'>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </section>
+            <section class='events'>
+                <div class="container">
+                    <div class='title_wrapper'>
+                        <h2 data-aos="fade-up">Актуальные мероприятия</h2>
+                        <div class='events_settings' data-aos="fade-up">
+                            <div class='label_wrapper'>
+                                <div class='label_title'>Тип мероприятия</div>
+                                <select class="category_select select" name="category">
+                                    <option value="Все">Все</option>
+                                    <option value="Футбол">Футбол</option>
+                                    <option value="Хоккей">Хоккей</option>
+                                    <option value="Другие спортивные мероприятия">Другие спортивные мероприятия</option>
+                                    <option value="Культурно-массовые мероприятия">Культурно-массовые мероприятия
+                                    </option>
+
+                                </select>
+                            </div>
+                            <a href="events.html" class='btn'>Все мероприятия</a>
+                        </div>
+                    </div>
+                    <div class='slider_wrapper'>
+                        <div class='swiper events_slider'>
+                            <div class='swiper-wrapper'>
+                                <div class='swiper-slide' data-aos="fade-left" data-aos-delay="100">
+                                    <div class='events_item'>
+                                        <div class='label label_cat'>
+                                            <svg class='w24 fill_none'>
+                                                <use xlink:href="imgs/sprite.symbol.svg#category_football"></use>
+                                            </svg>
+                                            <!-- остальные иконки категорий -->
+                                            <!-- <svg class='w24 fill_none'>
+                                                    <use xlink:href="imgs/sprite.symbol.svg#category_cultural"></use>
+                                                </svg>
+                                                <svg class='w24 fill_none'>
+                                                    <use xlink:href="imgs/sprite.symbol.svg#category_hockey"></use>
+                                                </svg>
+                                                <svg class='w24 fill_none'>
+                                                    <use xlink:href="imgs/sprite.symbol.svg#category_sport"></use>
+                                                </svg> -->
+                                        </div>
+                                        <div class='label label_text'>Идёт набор</div>
+                                        <div class='item_img'><img src="imgs/events_img.png" alt=""></div>
+                                        <div class='events_item_body'>
+                                            <a href="#" class='item_title'>
+                                                <span>
+                                                    Мир чемпионат РПЛ ФК “Урал” - ФК
+                                                    “Зенит”
+                                                </span>
+                                                <svg class='w24 stroke_black'>
+                                                    <use xlink:href="imgs/sprite.symbol.svg#arrow_up_right"></use>
+                                                </svg>
+                                            </a>
+                                            <div class='events_item_text'>Дополнительная информация Дополнительная
+                                                информация
+                                            </div>
+                                            <ul class='events_item_list'>
+                                                <li>
+                                                    <svg class='w20 fill_none stroke_black'>
+                                                        <use xlink:href="imgs/sprite.symbol.svg#location"></use>
+                                                    </svg>
+                                                    Свердловская обл, г Екатеринбург
+                                                </li>
+                                                <li>
+                                                    <svg class='w20 fill_none stroke_black'>
+                                                        <use xlink:href="imgs/sprite.symbol.svg#calendar"></use>
+                                                    </svg>
+                                                    20 января 2024
+                                                </li>
+                                                <li>
+                                                    <svg class='w20 fill_none stroke_black'>
+                                                        <use xlink:href="imgs/sprite.symbol.svg#watch"></use>
+                                                    </svg>
+                                                    19:00-21:30
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class='events_item_btns'>
+                                            <a href="#" class='btn btn_small'>Подать заявку</a>
+                                            <a href="#" class='btn btn_small btn_opacity'>Подробнее</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class='swiper-slide' data-aos="fade-left" data-aos-delay="200">
+                                    <div class='events_item'>
+                                        <div class='label label_cat'>
+                                            <svg class='w24 fill_none'>
+                                                <use xlink:href="imgs/sprite.symbol.svg#category_football"></use>
+                                            </svg>
+                                            <!-- остальные иконки категорий -->
+                                            <!-- <svg class='w24 fill_none'>
+                                                    <use xlink:href="imgs/sprite.symbol.svg#category_cultural"></use>
+                                                </svg>
+                                                <svg class='w24 fill_none'>
+                                                    <use xlink:href="imgs/sprite.symbol.svg#category_hockey"></use>
+                                                </svg>
+                                                <svg class='w24 fill_none'>
+                                                    <use xlink:href="imgs/sprite.symbol.svg#category_sport"></use>
+                                                </svg> -->
+                                        </div>
+                                        <div class='label label_text'>Идёт набор</div>
+                                        <div class='item_img'><img src="imgs/events_img.png" alt=""></div>
+                                        <div class='events_item_body'>
+                                            <a href="#" class='item_title'>
+                                                <span>
+                                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum
+                                                    dolor sit amet, consectetur adipiscing elit.
+                                                </span>
+                                                <svg class='w24 stroke_black'>
+                                                    <use xlink:href="imgs/sprite.symbol.svg#arrow_up_right"></use>
+                                                </svg>
+                                            </a>
+                                            <div class='events_item_text'>Lorem ipsum dolor sit amet, consectetur
+                                                adipiscing
+                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum
+                                                dolor
+                                                sit amet, consectetur adipiscing elit.
+                                            </div>
+                                            <ul class='events_item_list'>
+                                                <li>
+                                                    <svg class='w20 fill_none stroke_black'>
+                                                        <use xlink:href="imgs/sprite.symbol.svg#location"></use>
+                                                    </svg>
+                                                    Свердловская обл, г Екатеринбург
+                                                </li>
+                                                <li>
+                                                    <svg class='w20 fill_none stroke_black'>
+                                                        <use xlink:href="imgs/sprite.symbol.svg#calendar"></use>
+                                                    </svg>
+                                                    20 января 2024
+                                                </li>
+                                                <li>
+                                                    <svg class='w20 fill_none stroke_black'>
+                                                        <use xlink:href="imgs/sprite.symbol.svg#watch"></use>
+                                                    </svg>
+                                                    19:00-21:30
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class='events_item_btns'>
+                                            <a href="#" class='btn btn_small'>Подать заявку</a>
+                                            <a href="#" class='btn btn_small btn_opacity'>Подробнее</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class='swiper-slide' data-aos="fade-left" data-aos-delay="300">
+                                    <div class='events_item'>
+                                        <div class='label label_cat'>
+                                            <svg class='w24 fill_none'>
+                                                <use xlink:href="imgs/sprite.symbol.svg#category_football"></use>
+                                            </svg>
+                                            <!-- остальные иконки категорий -->
+                                            <!-- <svg class='w24 fill_none'>
+                                                    <use xlink:href="imgs/sprite.symbol.svg#category_cultural"></use>
+                                                </svg>
+                                                <svg class='w24 fill_none'>
+                                                    <use xlink:href="imgs/sprite.symbol.svg#category_hockey"></use>
+                                                </svg>
+                                                <svg class='w24 fill_none'>
+                                                    <use xlink:href="imgs/sprite.symbol.svg#category_sport"></use>
+                                                </svg> -->
+                                        </div>
+                                        <div class='label label_text'>Идёт набор</div>
+                                        <div class='item_img'><img src="imgs/events_img.png" alt=""></div>
+                                        <div class='events_item_body'>
+                                            <a href="#" class='item_title'>
+                                                <span>
+                                                    Мир чемпионат РПЛ ФК “Урал” - ФК
+                                                    “Зенит”
+                                                </span>
+                                                <svg class='w24 stroke_black'>
+                                                    <use xlink:href="imgs/sprite.symbol.svg#arrow_up_right"></use>
+                                                </svg>
+                                            </a>
+                                            <div class='events_item_text'>Дополнительная информация Дополнительная
+                                                информация
+                                            </div>
+                                            <ul class='events_item_list'>
+                                                <li>
+                                                    <svg class='w20 fill_none stroke_black'>
+                                                        <use xlink:href="imgs/sprite.symbol.svg#location"></use>
+                                                    </svg>
+                                                    Свердловская обл, г Екатеринбург
+                                                </li>
+                                                <li>
+                                                    <svg class='w20 fill_none stroke_black'>
+                                                        <use xlink:href="imgs/sprite.symbol.svg#calendar"></use>
+                                                    </svg>
+                                                    20 января 2024
+                                                </li>
+                                                <li>
+                                                    <svg class='w20 fill_none stroke_black'>
+                                                        <use xlink:href="imgs/sprite.symbol.svg#watch"></use>
+                                                    </svg>
+                                                    19:00-21:30
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class='events_item_btns'>
+                                            <a href="#" class='btn btn_small'>Подать заявку</a>
+                                            <a href="#" class='btn btn_small btn_opacity'>Подробнее</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="swiper-pagination" data-aos="fade-up"></div>
+                        </div>
+                    </div>
+                    <div class='d-flex justify-content-center section_mobile_btn' data-aos="fade-up">
+                        <a href="events.html" class='btn w-100'>Все мероприятия</a>
+                    </div>
+                </div>
+                <div class='lines_top' data-aos="load">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <div class='arena_bottom' data-aos="load"><img src="imgs/events_arena.svg" alt=""></div>
+            </section>
+            <section class='advantages' data-aos="load">
+                <div class='container'>
+                    <h2 data-aos="fade-up">Преимущества</h2>
+                </div>
+                <div class='swiper advantages_slider'>
+                    <div class="swiper-wrapper">
+
+                        <div class="swiper-slide">
+                            <div class='container'>
+                                <div class="advantages_item">
+                                    <div class='advantages_item_left' data-aos="fade-left">
+                                        <div class='advantages_item_title font_code'>
+                                            <span>1.</span>Зарабатывайте<br> в любое время
+                                        </div>
+                                        <div class='advantages_item_text'>Сервис
+                                            позволяет
+                                            самостоятельно подбирать
+                                            мероприятия, помогая сделать график работы удобным и индивидуальным.</div>
+                                        <a href="#" class='btn btn_small'>Подать заявку</a>
+                                    </div>
+                                    <div class='advantages_item_right'>
+                                        <div data-aos="zoom-in" class='advantages_item_img_wrapper'>
+                                            <div class='slide_img slide_img_small'>
+                                                <div class='parallax'><img data-depth="-1" src="imgs/adv_slide_1.svg"
+                                                        alt="">
+                                                </div>
+                                            </div>
+                                            <div class='slide_img slide_img_big'>
+                                                <div class='parallax'><img data-depth="1" src="imgs/adv_slide_1.svg"
+                                                        alt="">
+                                                </div>
+                                            </div>
+                                            <div class='advantages_item_img'><img src="imgs/adv_img_1.jpg" alt=""></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="swiper-slide">
+                            <div class='container'>
+                                <div class="advantages_item">
+                                    <div class='advantages_item_left' data-aos="fade-left">
+                                        <div class='advantages_item_title font_code'><span>2.</span>Комфорт<br> и
+                                            безопасность –
+                                            наша
+                                            заслуга
+                                        </div>
+                                        <div class='advantages_item_text'>В программе подготовки реализованы европейские
+                                            стандарты качества сервиса и безопасности.</div>
+                                        <a href="#" class='btn btn_small'>Подать заявку</a>
+                                    </div>
+                                    <div class='advantages_item_right'>
+                                        <div data-aos="zoom-in" class='advantages_item_img_wrapper'>
+                                            <div class='slide_img slide_img_small'>
+                                                <div class='parallax'><img data-depth="-1" src="imgs/adv_slide_2.svg"
+                                                        alt="">
+                                                </div>
+                                            </div>
+                                            <div class='slide_img slide_img_big'>
+                                                <div class='parallax'><img data-depth="1" src="imgs/adv_slide_2.svg"
+                                                        alt="">
+                                                </div>
+                                            </div>
+                                            <div class='advantages_item_img'><img src="imgs/adv_img_2.jpg" alt=""></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="swiper-slide">
+                            <div class='container'>
+                                <div class="advantages_item">
+                                    <div class='advantages_item_left' data-aos="fade-left">
+                                        <div class='advantages_item_title font_code'><span>3.</span>Посещайте топовые
+                                            мероприятия
+                                            бесплатно
+                                        </div>
+                                        <div class='advantages_item_text'>Посетить международные матчи и турниры
+                                            становиться
+                                            проще, если ты сам – организатор события!</div>
+                                        <a href="#" class='btn btn_small'>Подать заявку</a>
+                                    </div>
+                                    <div class='advantages_item_right'>
+                                        <div data-aos="zoom-in" class='advantages_item_img_wrapper'>
+                                            <div class='slide_img slide_img_small'>
+                                                <div class='parallax'><img data-depth="-1" src="imgs/adv_slide_3.svg"
+                                                        alt="">
+                                                </div>
+                                            </div>
+                                            <div class='slide_img slide_img_big'>
+                                                <div class='parallax'><img data-depth="1" src="imgs/adv_slide_3.svg"
+                                                        alt="">
+                                                </div>
+                                            </div>
+                                            <div class='advantages_item_img'><img src="imgs/adv_img_3.jpg" alt=""></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="swiper-slide">
+                            <div class='container'>
+                                <div class="advantages_item">
+                                    <div class='advantages_item_left' data-aos="fade-left">
+                                        <div class='advantages_item_title font_code'><span>4.</span>Быть<br> стюардом –
+                                            быть
+                                            профессионалом
+                                        </div>
+                                        <div class='advantages_item_text'>Специальная программа подготовки позволяет
+                                            получить уникальные знания в области организации безопасности масштабных
+                                            мероприятий.</div>
+                                        <a href="#" class='btn btn_small'>Подать заявку</a>
+                                    </div>
+                                    <div class='advantages_item_right'>
+                                        <div data-aos="zoom-in" class='advantages_item_img_wrapper'>
+                                            <div class='slide_img slide_img_small'>
+                                                <div class='parallax'><img data-depth="-1" src="imgs/adv_slide_4.svg"
+                                                        alt="">
+                                                </div>
+                                            </div>
+                                            <div class='slide_img slide_img_big'>
+                                                <div class='parallax'><img data-depth="1" src="imgs/adv_slide_4.svg"
+                                                        alt="">
+                                                </div>
+                                            </div>
+                                            <div class='advantages_item_img'><img src="imgs/adv_img_4.jpg" alt=""></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="swiper-slide">
+                            <div class='container'>
+                                <div class="advantages_item">
+                                    <div class='advantages_item_left' data-aos="fade-left">
+                                        <div class='advantages_item_title font_code'><span>5.</span>От стажера<br> до
+                                            руководителя
+                                            один
+                                            шаг
+                                        </div>
+                                        <div class='advantages_item_text'>Программа профессиональной переподготовки
+                                            доступна
+                                            с первого шага – теперь стать лидером команды может каждый.</div>
+                                        <a href="#" class='btn btn_small'>Подать заявку</a>
+                                    </div>
+                                    <div class='advantages_item_right'>
+                                        <div data-aos="zoom-in" class='advantages_item_img_wrapper'>
+                                            <div class='slide_img slide_img_small'>
+                                                <div class='parallax'><img data-depth="-1" src="imgs/adv_slide_5.svg"
+                                                        alt="">
+                                                </div>
+                                            </div>
+                                            <div class='slide_img slide_img_big'>
+                                                <div class='parallax'><img data-depth="1" src="imgs/adv_slide_5.svg"
+                                                        alt="">
+                                                </div>
+                                            </div>
+                                            <div class='advantages_item_img'><img src="imgs/adv_img_5.jpg" alt=""></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="swiper-slide">
+                            <div class='container'>
+                                <div class="advantages_item">
+                                    <div class='advantages_item_left' data-aos="fade-left">
+                                        <div class='advantages_item_title font_code'><span>6.</span>Развивайтесь вместе
+                                            с нами
+                                        </div>
+                                        <div class='advantages_item_text'>Каждое мероприятие – отличная практика для
+                                            ваших
+                                            навыков общения и лидерских качеств.</div>
+                                        <a href="#" class='btn btn_small'>Подать заявку</a>
+                                    </div>
+                                    <div class='advantages_item_right'>
+                                        <div data-aos="zoom-in" class='advantages_item_img_wrapper'>
+                                            <div class='slide_img slide_img_small'>
+                                                <div class='parallax'><img data-depth="-1" src="imgs/adv_slide_6.svg"
+                                                        alt="">
+                                                </div>
+                                            </div>
+                                            <div class='slide_img slide_img_big'>
+                                                <div class='parallax'><img data-depth="1" src="imgs/adv_slide_6.svg"
+                                                        alt="">
+                                                </div>
+                                            </div>
+                                            <div class='advantages_item_img'><img src="imgs/adv_img_6.jpg" alt=""></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class='container'>
+                        <div class='swiper_settings_wrapper'>
+                            <div class='swiper_settings' data-aos="fade-up">
+                                <div class="swiper-button-prev"></div>
+                                <div class="swiper-pagination"></div>
+                                <div class="swiper-button-next"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class='news'>
+                <div class="container">
+                    <div class='title_wrapper'>
+                        <h2 data-aos="fade-up">Новости</h2>
+                        <div class='news_icon' data-aos="zoom-in">
+                            <div class='parallax'>
+                                <svg data-depth="1.5" width="136" height="106" viewBox="0 0 136 106" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M72.1458 0L39.2948 38.7483L0 48.467L9.3499 79.5161L16.1728 77.8753L48.6447 105.264L64.9439 100.973L39.2948 71.8169L52.0562 67.9043L100.448 79.5161L72.1458 0Z"
+                                        fill="#148D4E" />
+                                    <path d="M102.211 49.922C107.683 39.7065 103.839 26.9886 93.623 21.5158"
+                                        stroke="#148D4E" stroke-width="11" />
+                                    <path d="M117.21 58.3477C127.258 39.5912 120.199 16.2403 101.442 6.19201"
+                                        stroke="#148D4E" stroke-width="11" />
+                                </svg>
+                            </div>
+                        </div>
+                        <a href="news.html" class='btn' data-aos="fade-up">Все новости</a>
+                    </div>
+                    <div class='slider_wrapper'>
+                        <div class='swiper news_slider'>
+                            <div class='swiper-wrapper'>
+                                <div class='swiper-slide' data-aos="fade-left" data-aos-delay="100">
+                                    <div class='news_item'>
+                                        <div class='item_img'><img src="imgs/events_img.png" alt=""></div>
+                                        <div class='news_item_body'>
+                                            <div class='news_item_category'>Футбол</div>
+                                            <a href="#" class='item_title'>
+                                                <span>
+                                                    Lorem ipsum dolor sit amet, consectetur adipiscing
+                                                    elit. Donec ullamcorper mattis lorem non. Ultrices praesent amet
+                                                    ipsum
+                                                    justo
+                                                    massa.
+                                                </span>
+                                                <svg class='w24 stroke_black'>
+                                                    <use xlink:href="imgs/sprite.symbol.svg#arrow_up_right"></use>
+                                                </svg>
+                                            </a>
+                                        </div>
+                                        <div class='news_item_footer'>
+                                            <div class='news_item_date'>20 Янв 2022</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class='swiper-slide' data-aos="fade-left" data-aos-delay="200">
+                                    <div class='news_item'>
+                                        <div class='item_img'><img src="imgs/events_img.png" alt=""></div>
+                                        <div class='news_item_body'>
+                                            <div class='news_item_category'>Футбол</div>
+                                            <a href="#" class='item_title'>
+                                                <span>
+                                                    Lorem ipsum dolor sit amet, consectetur adipiscing
+                                                    elit. Donec ullamcorper mattis lorem non. Ultrices praesent amet
+                                                    ipsum
+                                                    justo
+                                                    massa.
+                                                </span>
+                                                <svg class='w24 stroke_black'>
+                                                    <use xlink:href="imgs/sprite.symbol.svg#arrow_up_right"></use>
+                                                </svg>
+                                            </a>
+                                        </div>
+                                        <div class='news_item_footer'>
+                                            <div class='news_item_date'>20 Янв 2022</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class='swiper-slide' data-aos="fade-left" data-aos-delay="300">
+                                    <div class='news_item'>
+                                        <div class='item_img'><img src="imgs/events_img.png" alt=""></div>
+                                        <div class='news_item_body'>
+                                            <div class='news_item_category'>Футбол</div>
+                                            <a href="#" class='item_title'>
+                                                <span>
+                                                    Lorem ipsum dolor sit amet, consectetur adipiscing
+                                                    elit. D
+                                                </span>
+                                                <svg class='w24'>
+                                                    <use xlink:href="imgs/sprite.symbol.svg#arrow_up_right"></use>
+                                                </svg>
+                                            </a>
+                                        </div>
+                                        <div class='news_item_footer'>
+                                            <div class='news_item_date'>20 Янв 2022</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class='swiper-slide' data-aos="fade-left" data-aos-delay="400">
+                                    <div class='news_item'>
+                                        <div class='item_img'><img src="imgs/events_img.png" alt=""></div>
+                                        <div class='news_item_body'>
+                                            <div class='news_item_category'>Футбол</div>
+                                            <a href="#" class='item_title'>
+                                                <span>
+                                                    Lorem ip
+                                                </span>
+                                                <svg class='w24 stroke_black'>
+                                                    <use xlink:href="imgs/sprite.symbol.svg#arrow_up_right"></use>
+                                                </svg>
+                                            </a>
+                                        </div>
+                                        <div class='news_item_footer'>
+                                            <div class='news_item_date'>20 Янв 2022</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-pagination" data-aos="fade-up"></div>
+                        </div>
+                    </div>
+                    <div class='d-flex justify-content-center section_mobile_btn' data-aos="fade-up">
+                        <a href="news.html" class='btn w-100'>Все новости</a>
+                    </div>
+                </div>
+            </section>
+
+            <section class="about">
+                <div class="container">
+                    <div class='about_block'>
+                        <div class='about_left'>
+                            <h2 data-aos="fade-up">О нас</h2>
+                            <ul class='about_list '>
+                                <li data-aos="fade-left" data-aos-delay="100">Один из лидеров в Екатеринбурге
+                                    и&nbsp;Свердловской области в сфере
+                                    обеспечения
+                                    безопасности
+                                    массовых мероприятий</li>
+                                <li data-aos="fade-left" data-aos-delay="200">Команда специалистов
+                                    из&nbsp;индустрии&nbsp;спорта и сферы безопасности</li>
+                                <li data-aos="fade-left" data-aos-delay="300">Грамотный, обученный персонал</li>
+                                <li data-aos="fade-left" data-aos-delay="400">Индивидуальный подход к&nbsp;мероприятиям
+                                </li>
+                                <li data-aos="fade-left" data-aos-delay="500">Высокий уровень взаимодействия
+                                    с&nbsp;органами
+                                    правопорядка</li>
+                            </ul>
+                            <a href="#" class='btn' data-aos="fade-up">Подробнее</a>
+                        </div>
+                        <div class='about_right'>
+                            <div class="about_img">
+                                <img src="imgs/people3.png" alt="" data-aos="fade-up">
+                                <div class='circle_block '>
+                                    <div class='circle_wrapper'>
+                                        <div class='circle' data-aos="zoom-in" data-aos-delay="200">
+                                            <div><span></span></div>
+                                            <div><span></span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class='partners'>
+                <div class="container">
+                    <h2 data-aos="fade-up">Наши партнеры</h2>
+                    <div class='swiper partners_slider'>
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <div class="partners_item" data-aos="zoom-in-up" data-aos-delay="100"><img
+                                        src="imgs/partners_3.svg" alt=""></div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="partners_item" data-aos="zoom-in-up" data-aos-delay="200"><img
+                                        src="imgs/partners_2.svg" alt=""></div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="partners_item" data-aos="zoom-in-up" data-aos-delay="300"><img
+                                        src="imgs/partners_1.svg" alt=""></div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="partners_item" data-aos="zoom-in-up" data-aos-delay="400"><img
+                                        src="imgs/partners_4.png" alt=""></div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="partners_item" data-aos="zoom-in-up" data-aos-delay="500"><img
+                                        src="imgs/partners_2.svg" alt=""></div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="partners_item" data-aos="zoom-in-up" data-aos-delay="600"><img
+                                        src="imgs/partners_1.svg" alt=""></div>
+                            </div>
+                        </div>
+                        <div class='swiper_settings' data-aos="fade-up">
+                            <div class="swiper-button-prev"></div>
+                            <div class="swiper-pagination"></div>
+                            <div class="swiper-button-next"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class='contacts'>
+                <div class="container">
+                    <div class='contacts_block'>
+                        <div class='contacts_left'>
+                            <h2 data-aos="fade-right">Свяжитесь <br>с нами</h2>
+                            <div class='contacts_item' data-aos="fade-right" data-aos-delay="100">
+                                <svg class='w24 fill_none'>
+                                    <use xlink:href="imgs/sprite.symbol.svg#mail"></use>
+                                </svg>
+                                <div>
+                                    <div class='contacts_item_title'>Mail</div>
+                                    <div class='contacts_item_text'>Напишите нам</div>
+                                    <a href="mailto:hi@untitledui.com" class='contacts_item_link'>hi@untitledui.com</a>
+                                </div>
+                            </div>
+                            <div class='contacts_item' data-aos="fade-right" data-aos-delay="200">
+                                <svg class='w24 fill_none'>
+                                    <use xlink:href="imgs/sprite.symbol.svg#location"></use>
+                                </svg>
+                                <div>
+                                    <div class='contacts_item_title'>Адрес</div>
+                                    <div class='contacts_item_text'>Наш главный офис находится</div>
+                                    <div class='contacts_item_link'>г. Москва, ул Пушкина 432, д 23, кв 389</div>
+                                </div>
+                            </div>
+                            <div class='contacts_item' data-aos="fade-right" data-aos-delay="300">
+                                <svg class='w24 fill_none'>
+                                    <use xlink:href="imgs/sprite.symbol.svg#phone"></use>
+                                </svg>
+                                <div>
+                                    <div class='contacts_item_title'>Телефон</div>
+                                    <div class='contacts_item_text'>Звонки принимаются с 9:00 до 17:00</div>
+                                    <a href="tel:+7(555)0000000" class='contacts_item_link'>+7 (555) 000-0000</a>
+                                </div>
+                            </div>
+                            <div class='social_list'>
+                                <a href="#" data-aos="zoom-in" data-aos-delay="100">
+                                    <img src="imgs/telegram.svg" alt="">
+                                </a>
+                                <a href="#" data-aos="zoom-in" data-aos-delay="200">
+                                    <img src="imgs/vk.svg" alt="">
+                                </a>
+                                <a href="#" data-aos="zoom-in" data-aos-delay="300">
+                                    <img src="imgs/whatsap.svg" alt="">
+                                </a>
+                            </div>
+                        </div>
+                        <div class='contacts_right'>
+                            <form method="post" class="" data-aos="fade-up">
+                                <div class='form_input_row'>
+                                    <label class="form_input_group">
+                                        <span class="form_input_wrapper">
+                                            <input type="text" name="name" placeholder="Ваше имя" class="form_input">
+                                            <span class="text_error">Заполните поле</span>
+                                        </span>
+                                    </label>
+                                    <label class="form_input_group">
+                                        <span class="form_input_wrapper">
+                                            <input type="text" name="lastName" placeholder="Ваша фамилия"
+                                                class="form_input">
+                                            <span class="text_error">Заполните поле</span>
+                                        </span>
+                                    </label>
+                                </div>
+                                <div class='form_input_row'>
+                                    <label class="form_input_group">
+                                        <span class="form_input_wrapper">
+                                            <input type="email" name="email" placeholder="you@company.com"
+                                                class="form_input">
+                                            <span class="text_error">Заполните поле</span>
+                                        </span>
+                                    </label>
+                                    <label class="form_input_group">
+                                        <span class="form_input_wrapper">
+                                            <input type="tel" name="tel" placeholder="+7 (555) 000-0000"
+                                                class="form_input">
+                                            <span class="text_error">Заполните поле</span>
+                                        </span>
+                                    </label>
+                                </div>
+                                <label class="form_input_group">
+                                    <span class="form_input_wrapper">
+                                        <textarea name="message" class="form_input form_textarea"
+                                            placeholder="Комментарий"></textarea>
+                                        <span class="text_error">Заполните поле</span>
+                                    </span>
+                                </label>
+                                <label class='checkbox_block'>
+                                    <input type="checkbox" checked class="checkbox_block_input">
+                                    <span class='checkbox_block_caption'>Я даю свое согласие на обработку моих
+                                        персональных
+                                        данных в соответствии с законом
+                                        №152-ФЗ «О персональных данных» от 27.07.2006 и <a href="#">Политикой
+                                            Компании</a> в
+                                        области защиты персональных данных</span>
+                                </label>
+                                <button class="btn" type="submit">Отправить</button>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+        </main>
+    </div>
+    <footer class='footer'>
+        <div class="container">
+            <div class='footer_top'>
+                <a href="/" class="logo"><img src="imgs/logo.svg" alt=""></a>
+                <div class='footer_top_right'>
+                    <nav class='menu'>
+                        <ul>
+                            <li><a href="#">Мероприятия</a></li>
+                            <li><a href="#">Обучение</a></li>
+                            <li><a href="#">О компании</a></li>
+                            <li><a href="#">Правила</a></li>
+                        </ul>
+                    </nav>
+                    <a href="#" class='link'>Политика конфиденциальности</a>
+                </div>
+            </div>
+            <div class='footer_bottom'>
+                <div>© ООО «Арена-Урал», 2024</div>
+                <div>Сделано в <a class='link'>MediaLine</a></div>
+                <div class='footer_bottom_link'>
+                    <a href="tel:+78009001000">8 800 900 10 00</a>
+                    <a href="mailto:mail@mail.com">mail@mail.com</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- используется только на главной для анимации людей на первом экране -->
+    <script src="vendors/gsap/gsap.min.js"></script>
+
+    <script src="vendors/jquery/jquery-3.5.1.min.js"></script>
+    <script src="vendors/swiper/swiper-bundle.min.js"></script>
+    <script src="vendors/select2/select2.full.min.js"></script>
+    <script src="vendors/animate/aos.min.js"></script>
+    <script src="vendors/parallax/parallax.min.js"></script>
+    <script src="vendors/easepick/easepick.umd.min.js"></script>
+    <script src="vendors/imask/imask.js"></script>
+    <!-- используется только на стр новости -->
+    <script src="vendors/fancybox/jquery.fancybox.min.js"></script>
+    <script src="vendors/plyr/plyr.polyfilled.js"></script>
+
+    <script src="js/common.js?10"></script>
+
+</body>
+
+</html>

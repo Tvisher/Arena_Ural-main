@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="description" content="Арена Урал" />
+    <meta name="keywords" content="" />
+    <title>Авторизация</title>
+    <!-- Favicons -->
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon-precomposed" sizes="180x180" href="favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
+    <link rel="manifest" href="favicons/site.webmanifest">
+    <link rel="mask-icon" href="favicons/safari-pinned-tab.svg" color="#000000">
+    <meta name="msapplication-TileColor" content="#2d89ef">
+    <meta name="msapplication-config" content="favicons/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+
+    <!-- шрифты -->
+    <link rel="preload" href="fonts/Inter-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="preload" href="fonts/Inter-Medium.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="preload" href="fonts/Inter-SemiBold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="preload" href="fonts/Code-Pro-LC.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="preload" href="fonts/Code-Pro-Bold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="preload" href="fonts/Code-Pro-Black-LC.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="stylesheet" href="vendors/select2/select2.min.css">
+
+    <link rel="stylesheet" href="css/common.css?15">
+    <link rel="stylesheet" href="css/auth.min.css">
+</head>
+
+<body>
+    <main>
+        <div class="auth-block" id="auth-block">
+            <div class="auth-block__content">
+                <a href="/" class="auth-block__head">
+                    <img src="imgs/logo.svg" alt="">
+                </a>
+                <form class="auth-block__forms" @submit.prevent>
+                    <div class="auth-form" v-show="showFormType == 'auth'">
+                        <h4 class="form-title">Авторизация</h4>
+                        <label class="auth-block__label"
+                            :class="{'has-error':(authFormData.checkValidate && !isEmailValid(authFormData.email))}">
+                            <span class="label__info">Email*</span>
+                            <input type="text" name="email" class="form_input" placeholder="you@company.com"
+                                v-model.trim="authFormData.email">
+                            <span class="error-message">Укажите корректный Email</span>
+                        </label>
+
+
+                        <label class="auth-block__label"
+                            :class="{'has-error':authFormData.checkValidate && !authFormData.password}">
+                            <span class="label__info">Пароль*</span>
+                            <div class="pass-input__wrapper">
+                                <input type="password" class="form_input pass-input" placeholder="***********"
+                                    v-model.trim="authFormData.password">
+                                <span class="error-message"
+                                    v-if="authFormData.checkValidate && !authFormData.password">Заполните
+                                    поле</span>
+                                <span class="error-message" v-if="authFormData.ajaxErrors.length>0"
+                                    style="display: block;" v-for="err in authFormData.ajaxErrors">{{err}}</span>
+                                <div class="show-pass"></div>
+                            </div>
+                        </label>
+                        <button class="btn auth-form__btn" @click="getAuth">Войти</button>
+                        <button class="forgot-password-btn" @click="showFormType = 'forgot'">Забыли пароль?</button>
+                        <div class="auth-form__footer">
+                            <button class="btn auth-form__btn vk-auth">
+                                <span class="ico">
+                                    <svg width="27" height="17" viewBox="0 0 27 17" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M14.5333 16.65C5.41658 16.65 0.216667 10.4 0 0H4.56667C4.71667 7.63333 8.08325 10.8667 10.7499 11.5333V0H15.0501V6.58333C17.6834 6.3 20.4497 3.3 21.3831 0H25.6832C24.9665 4.06667 21.9665 7.06667 19.8332 8.3C21.9665 9.3 25.3833 11.9167 26.6833 16.65H21.9498C20.9332 13.4833 18.4001 11.0333 15.0501 10.7V16.65H14.5333Z"
+                                            fill="white" />
+                                    </svg>
+                                </span>
+                                Авторизация
+                            </button>
+                            <button class="btn auth-form__btn" @click="showFormType = 'register'">Регистрация по
+                                E-mail</button>
+                        </div>
+                    </div>
+                    <div class="register-form" v-show="showFormType == 'register'">
+                        <h4 class="form-title">Регистрация по E-mail</h4>
+                        <div class="form-descr">Заполните данные</div>
+                        <label class="auth-block__label"
+                            :class="{'has-error':registerData.checkValidate && registerData.errors.includes('invalid-email')}">
+                            <span class="label__info">Email*</span>
+                            <input type="text" class="form_input" placeholder="you@company.com"
+                                v-model.trim="registerData.email" @input="hideRegErr($event)" name="email">
+                            <div class="error-message">Укажите корректный Email</div>
+
+                        </label>
+                        <label class="auth-block__label"
+                            :class="{'has-error':registerData.checkValidate && registerData.errors.includes('invalid-pass')}">
+                            <span class="label__info">Пароль*</span>
+                            <div class="pass-input__wrapper">
+                                <input type="password" class="form_input pass-input" placeholder="******"
+                                    autocomplete="new-password" v-model.trim="registerData.password"
+                                    @input="hideRegErr($event)" name="pass">
+                                <div class="show-pass"></div>
+                            </div>
+                            <div class="error-message">Минимум 6 символов (латиница и цифры)</div>
+                        </label>
+                        <label class="auth-block__label"
+                            :class="{'has-error':registerData.checkValidate && registerData.errors.includes('not-match')}">
+                            <span class="label__info">Повторите пароль*</span>
+                            <div class="pass-input__wrapper">
+                                <input type="password" class="form_input pass-input" placeholder="******"
+                                    autocomplete="new-password" v-model.trim="registerData.passwordRepeat"
+                                    @input="hideRegErr($event)" name="pass-repeat">
+                                <div class="show-pass"></div>
+                            </div>
+                            <div class="error-message">Пароли не совпадают</div>
+                        </label>
+                        <button class="btn auth-form__btn" @click="createCabinetStep">Далее</button>
+                        <button class="forgot-password-btn" @click="showFormType = 'auth'">Авторизация</button>
+                    </div>
+                    <div class="forgot-form register-form" v-show="showFormType == 'forgot'">
+                        <h4 class="form-title">Забыли пароль?</h4>
+                        <div class="form-descr">Введите E-mail на который отправить пароль</div>
+                        <label class="auth-block__label"
+                            :class="{'has-error':forgotEmailData.checkValidate && forgotEmailData.errors.includes('invalid-email')}">
+                            <span class="label__info">Email*</span>
+                            <input type="text" class="form_input" placeholder="you@company.com"
+                                v-model.trim="forgotEmailData.email" name="email" @input="hideFogotErr">
+                            <div class="error-message">Укажите корректный Email</div>
+
+                        </label>
+                        <button class="btn auth-form__btn" @click="setFogotEmail">Отправить</button>
+                        <button class="forgot-password-btn" @click="showFormType = 'auth'">Авторизация</button>
+                    </div>
+                    <div class="create-cabinet-form register-form" v-show="showFormType == 'create-cabinet'">
+                        <h4 class="form-title">Создание личного кабинета</h4>
+                        <div class="labeles__wrepper three-in-row">
+                            <label class="auth-block__label"
+                                :class="{'has-error':createCabinetData.checkValidate && createCabinetData.errors.includes('invalid-surname')}">
+                                <span class="label__info">Фамилия*</span>
+                                <input type="text" class="form_input" placeholder="Иванов"
+                                    v-model.trim="createCabinetData.surname" name="surname"
+                                    @input="hideCreateErr($event)">
+                                <div class="error-message">Заполните поле</div>
+                            </label>
+
+                            <label class="auth-block__label"
+                                :class="{'has-error':createCabinetData.checkValidate && createCabinetData.errors.includes('invalid-name')}">
+                                <span class="label__info">Имя*</span>
+                                <input type="text" class="form_input" placeholder="Иван"
+                                    v-model.trim="createCabinetData.name" name="name" @input="hideCreateErr($event)">
+                                <div class="error-message">Заполните поле</div>
+                            </label>
+
+                            <label class="auth-block__label"
+                                :class="{'has-error':createCabinetData.checkValidate && createCabinetData.errors.includes('invalid-patronymic')}">
+                                <span class="label__info">Отчество*</span>
+                                <input type="text" class="form_input" placeholder="Иванович"
+                                    v-model.trim="createCabinetData.patronymic" name="patronymic"
+                                    @input="hideCreateErr($event)">
+                                <div class="error-message">Заполните поле</div>
+                            </label>
+                        </div>
+                        <div class="labeles__wrepper">
+                            <label class="auth-block__label"
+                                :class="{'has-error':createCabinetData.checkValidate && createCabinetData.errors.includes('invalid-phone')}">
+                                <span class="label__info">Телефон*</span>
+                                <input type="text" class="form_input phone-input" placeholder="+7(000)000-00-00"
+                                    v-model.trim="createCabinetData.phone" maxlength="16" name="phone"
+                                    @input="hideCreateErr($event)" autocomplete="off">
+                                <div class="error-message">Укажите корректный номер</div>
+
+                            </label>
+
+                            <label class="auth-block__label"
+                                :class="{'has-error':createCabinetData.checkValidate && createCabinetData.errors.includes('invalid-email')}">
+                                <span class="label__info">Email*</span>
+                                <input type="text" class="form_input" placeholder="you@company.com"
+                                    v-model.trim="registerData.email" @input="hideCreateErr($event)">
+                                <div class="error-message">Укажите корректный Email</div>
+
+                            </label>
+                        </div>
+                        <div class="labeles__wrepper">
+                            <div class="auth-block__label date__input-label"
+                                :class="{'has-error':createCabinetData.checkValidate && createCabinetData.errors.includes('invalid-birthday')}">
+                                <span class="label__info">Дата рождения*</span>
+                                <div class="date__input_wrapper">
+                                    <input type="text" class="form_input date__input" placeholder="10.20.2024"
+                                        readonly="">
+                                    <div class="error-message">Необходимо заполнить поле</div>
+
+                                </div>
+                            </div>
+
+                            <label class="auth-block__label">
+                                <span class="label__info">Пол*</span>
+                                <select class="category_select select" name="gender" v-model="createCabinetData.gender">
+                                    <option value="Мужской">Мужской</option>
+                                    <option value="Женский">Женский</option>
+                                </select>
+                            </label>
+                        </div>
+
+                        <label class="auth-block__label">
+                            <span class="label__info">Паспорт болельщика</span>
+                            <input type="text" class="form_input" placeholder="Введите номер паспорта"
+                                v-model.trim="createCabinetData.fanID">
+                        </label>
+
+                        <label class="checkbox_block"
+                            :class="{'has-error':createCabinetData.checkValidate && createCabinetData.errors.includes('invalid-consentPersonalData')}">
+                            <input type="checkbox" class="checkbox_block_input"
+                                v-model="createCabinetData.consentPersonalData" @change="checkAgree($event)"
+                                name="consentPersonalData">
+                            <span class="checkbox_block_caption">Я даю свое согласие на обработку моих
+                                персональных
+                                данных в соответствии с законом
+                                №152-ФЗ «О персональных данных» от 27.07.2006 и <a href="#">Политикой
+                                    Компании</a> в
+                                области защиты персональных данных</span>
+                        </label>
+
+                        <label class="checkbox_block"
+                            :class="{'has-error':createCabinetData.checkValidate && createCabinetData.errors.includes('invalid-agreementToSiteRules')}">
+                            <input type="checkbox" class="checkbox_block_input"
+                                v-model="createCabinetData.agreementToSiteRules" @change="checkAgree($event)"
+                                name="agreementToSiteRules">
+                            <span class="checkbox_block_caption">"С условиями работы на платформе согласен."</span>
+                        </label>
+                        <button class="btn auth-form__btn" @click="createUser">Создать аккаунт</button>
+                    </div>
+
+                </form>
+                <div class="auth-block__footer">
+                    <span>© 2024 Все права защищены</span>
+                    <a href="mailto:help@untitledui.com" class="auth-block__help">
+                        <span class="ico">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M14.6673 3.99996C14.6673 3.26663 14.0673 2.66663 13.334 2.66663H2.66732C1.93398 2.66663 1.33398 3.26663 1.33398 3.99996M14.6673 3.99996V12C14.6673 12.7333 14.0673 13.3333 13.334 13.3333H2.66732C1.93398 13.3333 1.33398 12.7333 1.33398 12V3.99996M14.6673 3.99996L8.00065 8.66663L1.33398 3.99996"
+                                    stroke="#667085" stroke-width="1.33333" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+
+                        </span>
+                        <span>help@untitledui.com</span>
+                    </a>
+                </div>
+            </div>
+            <div class="auth-block__image" style="background-image: url(./imgs/auth-bg.jpg);"></div>
+
+            <transition name="fade" mode="out-in">
+                <div class="auth-block-modal" v-if="showModal" @click="closeModal">
+                    <div class="auth-block-modal__content">
+                        <div class="auth-block-modal__close"></div>
+                        <div class="auth-block-modal__ico"></div>
+                        <div class="auth-block-modal__title" v-html="modalText"></div>
+                        <button class="btn auth-form__btn" @click="showAuthScreen">Авторизация</button>
+                    </div>
+                </div>
+            </transition>
+        </div>
+
+    </main>
+
+    <script src="vendors/jquery/jquery-3.5.1.min.js"></script>
+    <script src="vendors/easepick/easepick.umd.min.js"></script>
+    <script src="vendors/select2/select2.full.min.js"></script>
+    <script src="vendors/imask/imask.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/3.4.21/vue.global.min.js"
+        integrity="sha512-gEM2INjX66kRUIwrPiTBzAA6d48haC9kqrWZWjzrtnpCtBNxOXqXVFEeRDOeVC13pw4EOBrvlsJnNr2MXiQGvg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+    <script>
+        const EMAIL_REGEXP = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/iu;
+        const auth = {
+            data() {
+                return {
+                    showModal: false,
+                    modalText: '',
+                    showFormType: 'auth',
+                    authFormData: {
+                        email: '',
+                        password: '',
+                        checkValidate: false,
+                        ajaxErrors: [],
+                    },
+                    registerData: {
+                        email: '',
+                        password: '',
+                        passwordRepeat: '',
+                        checkValidate: false,
+                        errors: []
+                    },
+                    createCabinetData: {
+                        name: '',
+                        surname: '',
+                        patronymic: '',
+                        phone: '',
+                        gender: 'Мужской',
+                        birthday: '',
+                        fanID: '',
+                        checkValidate: false,
+                        consentPersonalData: false,
+                        agreementToSiteRules: false,
+                        errors: []
+                    },
+                    forgotEmailData: {
+                        email: '',
+                        checkValidate: false,
+                        errors: []
+                    }
+                }
+            },
+            methods: {
+                isEmailValid(value) { return EMAIL_REGEXP.test(value) },
+                setFogotEmail() {
+                    const forgotEmailData = this.forgotEmailData;
+                    forgotEmailData.checkValidate = true;
+                    if (!this.isEmailValid(forgotEmailData.email)) {
+                        if (!forgotEmailData.errors.includes('invalid-email')) {
+                            forgotEmailData.errors.push('invalid-email')
+                        }
+                        return
+                    }
+                    console.log(forgotEmailData.email);
+                    this.modalText = `Ссылка для востановление пароля отправлена на <span style="color:#EF723B">${forgotEmailData.email}.</span>`;
+                    this.showModal = true;
+
+                },
+                showAuthScreen() {
+                    this.showFormType = 'auth';
+                    const authFormData = this.authFormData;
+                    authFormData.checkValidate = false;
+                    authFormData.email = '';
+                    authFormData.password = '';
+
+                    const registerData = this.registerData;
+                    registerData.email = '';
+                    registerData.password = '';
+                    registerData.passwordRepeat = '';
+                    registerData.checkValidate = false;
+                    registerData.errors = [];
+
+                    const createCabinetData = this.createCabinetData;
+                    createCabinetData.name = '';
+                    createCabinetData.surname = '';
+                    createCabinetData.patronymic = '';
+                    createCabinetData.phone = '';
+                    createCabinetData.gender = 'Мужской';
+                    createCabinetData.birthday = '';
+                    createCabinetData.fanID = '';
+                    createCabinetData.checkValidate = false;
+                    createCabinetData.consentPersonalData = false;
+                    createCabinetData.agreementToSiteRules = false;
+                    createCabinetData.errors = [];
+
+                    const forgotEmailData = this.forgotEmailData;
+                    forgotEmailData.email = '';
+                    forgotEmailData.checkValidate = false;
+                    forgotEmailData.errors = [];
+
+                    this.showModal = false;
+
+                },
+                closeModal(e) {
+                    const target = e.target;
+                    if ((target.closest('.auth-block-modal') && !target.closest('.auth-block-modal__content')) || target.closest('.auth-block-modal__close')) {
+                        this.showAuthScreen()
+                    }
+                },
+                getAuth() {
+                    this.authFormData.checkValidate = true;
+                    const authForm = document.querySelector('.auth-form');
+                    const authErrors = authForm.querySelector('has-error');
+                    if (authErrors) return;
+                    console.log(this.authFormData);
+
+                },
+                createUser() {
+                    const registerData = this.registerData;
+                    const createCabinetData = this.createCabinetData;
+                    createCabinetData.checkValidate = true;
+                    if (!this.isEmailValid(registerData.email)) {
+                        if (!createCabinetData.errors.includes('invalid-email')) {
+                            createCabinetData.errors.push('invalid-email')
+                        }
+                    }
+                    if (createCabinetData.name.length < 1) {
+                        if (!createCabinetData.errors.includes('invalid-name')) {
+                            createCabinetData.errors.push('invalid-name')
+                        }
+                    }
+                    if (createCabinetData.surname.length < 1) {
+                        if (!createCabinetData.errors.includes('invalid-surname')) {
+                            createCabinetData.errors.push('invalid-surname')
+                        }
+                    }
+
+                    if (createCabinetData.patronymic.length < 1) {
+                        if (!createCabinetData.errors.includes('invalid-patronymic')) {
+                            createCabinetData.errors.push('invalid-patronymic')
+                        }
+                    }
+                    if (createCabinetData.phone.trim().length < 16) {
+                        if (!createCabinetData.errors.includes('invalid-phone')) {
+                            createCabinetData.errors.push('invalid-phone')
+                        }
+                    }
+
+                    if (!createCabinetData.birthday.length) {
+                        if (!createCabinetData.errors.includes('invalid-birthday')) {
+                            createCabinetData.errors.push('invalid-birthday')
+                        }
+                    }
+
+                    if (!createCabinetData.consentPersonalData) {
+                        if (!createCabinetData.errors.includes('invalid-consentPersonalData')) {
+                            createCabinetData.errors.push('invalid-consentPersonalData')
+                        }
+                    }
+
+                    if (!createCabinetData.agreementToSiteRules) {
+                        if (!createCabinetData.errors.includes('invalid-agreementToSiteRules')) {
+                            createCabinetData.errors.push('invalid-agreementToSiteRules')
+                        }
+                    }
+
+                    if (!createCabinetData.errors.length) {
+                        console.log(createCabinetData, this.registerData);
+                        this.modalText = 'Вы успешно зарегистрированы на сайте!';
+                        this.showModal = true;
+                    }
+
+
+
+                },
+                hideRegErr(e) {
+                    const filed = e.target.name;
+                    const registerData = this.registerData;
+
+                    if (filed === 'email') {
+                        registerData.errors = registerData.errors.filter(el => el != "invalid-email");
+                    }
+
+                    if (filed === 'pass') {
+                        registerData.errors = registerData.errors.filter(el => el != "invalid-pass");
+                    }
+
+                    if (filed === 'pass-repeat') {
+                        registerData.errors = registerData.errors.filter(el => el != "not-match");
+                    }
+                },
+                hideCreateErr(e) {
+                    const filed = e.target.name;
+                    const createCabinetData = this.createCabinetData;
+                    if (filed === 'name') {
+                        createCabinetData.errors = createCabinetData.errors.filter(el => el != "invalid-name");
+                    }
+
+                    if (filed === 'surname') {
+                        createCabinetData.errors = createCabinetData.errors.filter(el => el != "invalid-surname");
+                    }
+
+                    if (filed === 'patronymic') {
+                        createCabinetData.errors = createCabinetData.errors.filter(el => el != "invalid-patronymic");
+                    }
+
+                    if (filed === 'email') {
+                        createCabinetData.errors = createCabinetData.errors.filter(el => el != "invalid-email");
+                    }
+
+                    if (filed === 'phone') {
+                        createCabinetData.errors = createCabinetData.errors.filter(el => el != "invalid-phone");
+                    }
+                },
+
+                hideFogotErr(e) {
+                    const filed = e.target.name;
+                    const forgotEmailData = this.forgotEmailData;
+                    if (filed === 'email') {
+                        forgotEmailData.errors = forgotEmailData.errors.filter(el => el != "invalid-email");
+                    }
+                },
+                checkAgree(e) {
+                    const filed = e.target.name;
+                    const isChecked = e.target.checked;
+                    const createCabinetData = this.createCabinetData;
+
+                    if (isChecked) {
+                        if (filed === 'consentPersonalData') {
+                            createCabinetData.errors = createCabinetData.errors.filter(el => el != "invalid-consentPersonalData");
+                        }
+                        if (filed === 'agreementToSiteRules') {
+                            createCabinetData.errors = createCabinetData.errors.filter(el => el != "invalid-agreementToSiteRules");
+                        }
+                    }
+                },
+
+                createCabinetStep() {
+                    this.registerData.checkValidate = true;
+                    if (!this.isEmailValid(this.registerData.email)) {
+                        if (!this.registerData.errors.includes('invalid-email')) {
+                            this.registerData.errors.push('invalid-email')
+                        }
+                    }
+                    const passRegex = /^[a-zA-Z0-9]+$/;
+                    if (!passRegex.test(this.registerData.password) || this.registerData.password.length < 6) {
+                        if (!this.registerData.errors.includes('invalid-pass')) {
+                            this.registerData.errors.push('invalid-pass')
+                        }
+                    }
+                    if (this.registerData.password.length < 1 || (this.registerData.password !== this.registerData.passwordRepeat)) {
+                        if (!this.registerData.errors.includes('not-match')) {
+                            this.registerData.errors.push('not-match');
+                        }
+                    }
+
+                    if (!this.registerData.errors.length) {
+                        this.showFormType = 'create-cabinet'
+                    }
+                }
+            },
+            watch: {
+                showFormType(newVal) {
+                    if (newVal === 'create-cabinet') {
+                        const vueInstance = this;
+                        vueInstance.$nextTick(() => {
+                            $('.select').select2({
+                                minimumResultsForSearch: Infinity,
+                                width: 'auto',
+                            });
+
+                            $('.select').on('select2:select', (e) => {
+                                vueInstance.createCabinetData.gender = e.params.data.id;
+                            });
+
+
+                            IMask(document.querySelector('.form_input.phone-input')
+                                , {
+                                    mask: '+{7}(000)000-00-00'
+                                })
+
+
+                            const picker = new easepick.create({
+                                element: document.querySelector('.date__input')
+                                ,
+                                css: [
+                                    "vendors/easepick/easepick.css?v=1",
+                                    "vendors/easepick/customize_easepick.css?v=1",
+                                ],
+                                setup(picker) {
+                                    if (vueInstance.createCabinetData.birthday != '') {
+                                        picker.setDate(vueInstance.createCabinetData.birthday);
+                                    }
+                                    picker.on('select', (e) => {
+                                        const date = new Date(e.detail.date);
+                                        const day = date.getDate();
+                                        const month = date.getMonth() + 1;
+                                        const year = date.getFullYear();
+                                        const formattedDate = (day < 10 ? '0' : '') + day + '.' + (month < 10 ? '0' : '') + month + '.' + year;
+                                        vueInstance.createCabinetData.birthday = formattedDate;
+                                        vueInstance.createCabinetData.errors = vueInstance.createCabinetData.errors.filter(el => el != "invalid-birthday");
+                                    });
+                                },
+                                lang: 'ru-US',
+                                format: "DD.MM.YYYY",
+                                zIndex: 100,
+                                AmpPlugin: {
+                                    locale: {
+                                        resetButton: '<svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M8.41425 7.00025L13.7072 1.70725C14.0982 1.31625 14.0982 0.68425 13.7072 0.29325C13.3162 -0.09775 12.6842 -0.09775 12.2933 0.29325L7.00025 5.58625L1.70725 0.29325C1.31625 -0.09775 0.68425 -0.09775 0.29325 0.29325C-0.09775 0.68425 -0.09775 1.31625 0.29325 1.70725L5.58625 7.00025L0.29325 12.2933C-0.09775 12.6842 -0.09775 13.3162 0.29325 13.7072C0.48825 13.9022 0.74425 14.0002 1.00025 14.0002C1.25625 14.0002 1.51225 13.9022 1.70725 13.7072L7.00025 8.41425L12.2933 13.7072C12.4882 13.9022 12.7443 14.0002 13.0002 14.0002C13.2562 14.0002 13.5122 13.9022 13.7072 13.7072C14.0982 13.3162 14.0982 12.6842 13.7072 12.2933L8.41425 7.00025Z"/></svg>'
+                                    },
+                                    darkMode: false,
+                                    dropdown: {
+                                        months: true,
+                                        years: true,
+                                        minYear: 1900
+                                    }
+                                },
+                                locale: {
+                                    cancel: "Отмена",
+                                    apply: "Применить",
+                                    previousMonth: '<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22.5 25L17.5 20L22.5 15" stroke="#667085" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+                                    nextMonth: '<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M17.5 25L22.5 20L17.5 15" stroke="#667085" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+                                },
+                                plugins: [
+                                    "AmpPlugin"
+                                ]
+                            });
+                        })
+                    }
+                }
+            },
+            mounted() {
+                this.$el.parentElement.style.opacity = '1';
+            }
+        }
+
+        Vue.createApp(auth).mount('#auth-block');
+
+
+        const passEyes = document.querySelectorAll('.show-pass');
+        passEyes.forEach(el => {
+            el.addEventListener('pointerdown', (e) => {
+                el.classList.add('show');
+                const passInput = el.closest('.pass-input__wrapper').querySelector('.pass-input');
+                passInput.type = 'text';
+            });
+
+            el.addEventListener('pointerup', (e) => {
+                el.classList.remove('show');
+                const passInput = el.closest('.pass-input__wrapper').querySelector('.pass-input');
+                passInput.type = 'password';
+            })
+        })
+    </script>
+</body>
+
+</html>

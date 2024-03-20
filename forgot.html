@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="description" content="Арена Урал" />
+    <meta name="keywords" content="" />
+    <title>Авторизация</title>
+    <!-- Favicons -->
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon-precomposed" sizes="180x180" href="favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
+    <link rel="manifest" href="favicons/site.webmanifest">
+    <link rel="mask-icon" href="favicons/safari-pinned-tab.svg" color="#000000">
+    <meta name="msapplication-TileColor" content="#2d89ef">
+    <meta name="msapplication-config" content="favicons/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+
+    <!-- шрифты -->
+    <link rel="preload" href="fonts/Inter-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="preload" href="fonts/Inter-Medium.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="preload" href="fonts/Inter-SemiBold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="preload" href="fonts/Code-Pro-LC.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="preload" href="fonts/Code-Pro-Bold.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="preload" href="fonts/Code-Pro-Black-LC.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="stylesheet" href="vendors/select2/select2.min.css">
+
+    <link rel="stylesheet" href="css/common.css?15">
+    <link rel="stylesheet" href="css/auth.min.css">
+</head>
+
+<body>
+    <main>
+        <div class="auth-block" id="auth-block">
+            <div class="auth-block__content">
+                <a href="/" class="auth-block__head">
+                    <img src="imgs/logo.svg" alt="">
+                </a>
+                <form class="auth-block__forms" @submit.prevent>
+
+                    <div class="register-form">
+                        <h4 class="form-title">Востановление пароля</h4>
+                        <div class="form-descr">Создайне новый пароль <br> Минимум 6 символов (латиница и
+                            цифры)
+                        </div>
+                        <label class="auth-block__label">
+                            <span class="label__info">Пароль*</span>
+                            <div class="pass-input__wrapper">
+                                <input type="password" class="form_input pass-input" placeholder="******"
+                                    autocomplete="new-password" name="pass">
+                                <div class="show-pass"></div>
+                            </div>
+                            <div class="error-message">Минимум 6 символов (латиница и цифры)</div>
+                        </label>
+                        <label class="auth-block__label">
+                            <span class="label__info">Повторите пароль*</span>
+                            <div class="pass-input__wrapper">
+                                <input type="password" class="form_input pass-input" placeholder="******"
+                                    autocomplete="new-password" name="pass-repeat">
+                                <div class="show-pass"></div>
+                            </div>
+                            <div class="error-message">Пароли не совпадают</div>
+                        </label>
+                        <button class="btn auth-form__btn" @click="">Изменить</button>
+                    </div>
+                </form>
+                <div class="auth-block__footer">
+                    <span>© 2024 Все права защищены</span>
+                    <a href="mailto:help@untitledui.com" class="auth-block__help">
+                        <span class="ico">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M14.6673 3.99996C14.6673 3.26663 14.0673 2.66663 13.334 2.66663H2.66732C1.93398 2.66663 1.33398 3.26663 1.33398 3.99996M14.6673 3.99996V12C14.6673 12.7333 14.0673 13.3333 13.334 13.3333H2.66732C1.93398 13.3333 1.33398 12.7333 1.33398 12V3.99996M14.6673 3.99996L8.00065 8.66663L1.33398 3.99996"
+                                    stroke="#667085" stroke-width="1.33333" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+
+                        </span>
+                        <span>help@untitledui.com</span>
+                    </a>
+                </div>
+            </div>
+            <div class="auth-block__image" style="background-image: url(./imgs/auth-bg.jpg);"></div>
+
+            <transition name="fade" mode="out-in">
+                <div class="auth-block-modal" v-if="showModal" @click="closeModal">
+                    <div class="auth-block-modal__content">
+                        <div class="auth-block-modal__close"></div>
+                        <div class="auth-block-modal__ico"></div>
+                        <div class="auth-block-modal__title">Пароль успешно изменён</div>
+                        <button class="btn auth-form__btn" @click="showAuthScreen">Авторизация</button>
+                    </div>
+                </div>
+            </transition>
+        </div>
+
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/3.4.21/vue.global.min.js"
+        integrity="sha512-gEM2INjX66kRUIwrPiTBzAA6d48haC9kqrWZWjzrtnpCtBNxOXqXVFEeRDOeVC13pw4EOBrvlsJnNr2MXiQGvg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+    <script>
+        const EMAIL_REGEXP = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/iu;
+        const auth = {
+            data() {
+                return {
+                    password: "",
+                    passwordRepat: "",
+                    checkValidate: "",
+                }
+            },
+            cpmputed: {
+
+            },
+            methods: {
+
+            },
+            mounted() {
+                this.$el.parentElement.style.opacity = '1';
+            }
+        }
+
+        Vue.createApp(auth).mount('#auth-block');
+
+
+        const passEyes = document.querySelectorAll('.show-pass');
+        passEyes.forEach(el => {
+            el.addEventListener('pointerdown', (e) => {
+                el.classList.add('show');
+                const passInput = el.closest('.pass-input__wrapper').querySelector('.pass-input');
+                passInput.type = 'text';
+            });
+
+            el.addEventListener('pointerup', (e) => {
+                el.classList.remove('show');
+                const passInput = el.closest('.pass-input__wrapper').querySelector('.pass-input');
+                passInput.type = 'password';
+            })
+        })
+    </script>
+</body>
+
+</html>
