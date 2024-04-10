@@ -33,7 +33,7 @@
     <link rel="stylesheet" href="vendors/animate/aos.min.css">
     <link rel="stylesheet" href="vendors/fancybox/jquery.fancybox.min.css">
     <link rel="stylesheet" href="vendors/plyr/plyr.css">
-    <link rel="stylesheet" href="css/common.css?15">
+    <link rel="stylesheet" href="css/common.min.css?15">
 </head>
 <!-- Для бэкендера: в секциях со слайдером, где, возможно, блоки будут выводиться циклом, есть data-aos-delay="" с  разными значениями. 
     Например: .events_slider у .events_item, и т.д. -->
@@ -222,7 +222,8 @@
                                             </ul>
                                         </div>
                                         <div class='events_item_btns'>
-                                            <a href="#" class='btn btn_small'>Подать заявку</a>
+                                            <a href="#" class='btn btn_small' data-event-registration data-id="1"
+                                                data-title="Мир чемпионат РПЛ ФК “Урал” - ФК “Зенит”">Подать заявку</a>
                                             <a href="#" class='btn btn_small btn_opacity'>Подробнее</a>
                                         </div>
                                     </div>
@@ -285,7 +286,9 @@
                                             </ul>
                                         </div>
                                         <div class='events_item_btns'>
-                                            <a href="#" class='btn btn_small'>Подать заявку</a>
+                                            <a href="#" class='btn btn_small' data-event-registration data-id="2"
+                                                data-title="Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum
+                                            dolor sit amet, consectetur adipiscing elit.">Подать заявку</a>
                                             <a href="#" class='btn btn_small btn_opacity'>Подробнее</a>
                                         </div>
                                     </div>
@@ -345,7 +348,10 @@
                                             </ul>
                                         </div>
                                         <div class='events_item_btns'>
-                                            <a href="#" class='btn btn_small'>Подать заявку</a>
+                                            <a href="#" class='btn btn_small' data-event-registration data-id="3"
+                                                data-title="Мир чемпионат РПЛ ФК “Урал” - ФК “Зенит”">
+                                                Подать заявку
+                                            </a>
                                             <a href="#" class='btn btn_small btn_opacity'>Подробнее</a>
                                         </div>
                                     </div>
@@ -906,7 +912,191 @@
                 </div>
             </div>
         </div>
+
+        <div class="event-registration-modal">
+            <div class="event-registration-modal__content">
+                <div class="event-registration-modal__close"></div>
+                <!-- sending - добавляется во время отправки данных -->
+                <!-- sent - добавляется после отправки данных -->
+                <form class="event-registration-form">
+                    <div class="form-title">Запись на мероприятие</div>
+                    <div class="event-registration__name">Название мероприятия</div>
+                    <div class='form_input_row'>
+                        <label class=" form_input_group">
+                            <span class="form_input_wrapper">
+                                <input type="text" name="name" placeholder="Ваше имя" class="form_input">
+                                <span class="text_error">Заполните поле</span>
+                            </span>
+                        </label>
+                        <label class="form_input_group">
+                            <span class="form_input_wrapper">
+                                <input type="text" name="lastName" placeholder="Ваша фамилия" class="form_input">
+                                <span class="text_error">Заполните поле</span>
+                            </span>
+                        </label>
+                    </div>
+                    <div class='form_input_row'>
+                        <label class="form_input_group">
+                            <span class="form_input_wrapper">
+                                <input type="text" name="email" placeholder="you@company.com" class="form_input">
+                                <span class="text_error">Заполните поле</span>
+                            </span>
+                        </label>
+                        <label class="form_input_group">
+                            <span class="form_input_wrapper">
+                                <input type="tel" name="tel" placeholder="+7 (555) 000-0000" class="form_input">
+                                <span class="text_error">Заполните поле</span>
+                            </span>
+                        </label>
+                    </div>
+                    <label class="form_input_group">
+                        <span class="form_input_wrapper">
+                            <textarea name="message" class="form_input form_textarea"
+                                placeholder="Комментарий"></textarea>
+                            <span class="text_error">Заполните поле</span>
+                        </span>
+                    </label>
+                    <label class='checkbox_block'>
+                        <input type="checkbox" checked class="checkbox_block_input">
+                        <span class='checkbox_block_caption'>Я даю свое согласие на обработку моих
+                            персональных
+                            данных в соответствии с законом
+                            №152-ФЗ «О персональных данных» от 27.07.2006 и <a href="#">Политикой
+                                Компании</a> в
+                            области защиты персональных данных</span>
+                    </label>
+                    <button class="btn" type="submit">Отправить</button>
+                </form>
+                <div class="event-registration-message">
+                    <div class="message__ico">
+                        <svg width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="4" y="4" width="48" height="48" rx="24" fill="#D1FADF" />
+                            <rect x="4" y="4" width="48" height="48" rx="24" stroke="#ECFDF3" stroke-width="8" />
+                            <path d="M36 22L25 33L20 28" stroke="#148D4E" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </svg>
+
+                    </div>
+                    <div class="message__text">
+                        Сообщение после отправки
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="to-top-btn"></div>
     </footer>
+    <script>
+
+        const registrationModal = document.querySelector('.event-registration-modal');
+        if (registrationModal) {
+            const EMAIL_REGEXP = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/iu;
+            const isEmailValid = (value) => EMAIL_REGEXP.test(value);
+            const eventRegistrationForm = document.querySelector('.event-registration-form');
+            const registrationModalTitle = registrationModal.querySelector('.event-registration__name');
+
+            const userName = eventRegistrationForm.querySelector('.form_input[name="name"]')
+            const userLastName = eventRegistrationForm.querySelector('.form_input[name="lastName"]')
+            const userEmail = eventRegistrationForm.querySelector('.form_input[name="email"]')
+            const userPhone = eventRegistrationForm.querySelector('.form_input[name="tel"]')
+            const userMessage = eventRegistrationForm.querySelector('.form_input[name="message"]')
+            const userAgreement = eventRegistrationForm.querySelector('.checkbox_block_input');
+            const fields = [
+                userName,
+                userLastName,
+                userPhone,
+                userEmail,
+                userMessage,
+            ];
+
+            fields.forEach(field => {
+                field.addEventListener('input', () => {
+                    const fieldWrapper = field.closest('.form_input_wrapper');
+                    fieldWrapper.classList.remove('error');
+                })
+            });
+
+            userAgreement.addEventListener('change', (e) => userAgreement.closest('.checkbox_block').classList.remove('error'))
+            document.addEventListener('click', (e) => {
+                const target = e.target;
+                if ((target.closest('.event-registration-modal') && !target.closest('.event-registration-modal__content'))
+                    ||
+                    target.closest('.event-registration-modal__close')) {
+                    registrationModal.classList.remove('show');
+                    eventRegistrationForm.classList.remove('sent');
+
+                }
+                if (!target.closest('[data-event-registration]')) return;
+                e.preventDefault()
+                const eventTitle = target.closest('[data-event-registration]').dataset.title;
+                const eventId = target.closest('[data-id]').dataset.id;
+                registrationModalTitle.innerHTML = eventTitle;
+                eventRegistrationForm.setAttribute('data-id', eventId)
+                registrationModal.classList.add('show');
+            });
+
+            eventRegistrationForm.addEventListener('submit', (e) => {
+                if (eventRegistrationForm.classList.contains('sending')) {
+                    return;
+                }
+                e.preventDefault();
+                fields.forEach(field => {
+                    const fieldWrapper = field.closest('.form_input_wrapper');
+                    const fieldValue = field.value.trim();
+                    if ((field.name === 'name' || field.name === 'lastName') && fieldValue.length < 1) {
+                        fieldWrapper.classList.add('error');
+                    }
+                    if (field.name === 'email' && !isEmailValid(fieldValue)) {
+                        fieldWrapper.classList.add('error')
+                    }
+
+                    if (field.name === 'tel' && fieldValue.replace(/[^+\d]/g, '').length < 12) {
+                        fieldWrapper.classList.add('error')
+                    }
+                })
+                if (!userAgreement.checked) {
+                    userAgreement.closest('.checkbox_block').classList.add('error');
+                }
+
+                const isFormHasError = eventRegistrationForm.querySelector('.error');
+                if (isFormHasError) return;
+
+                const formData = {
+                    userName: userName.value,
+                    userLastName: userLastName.value,
+                    userPhone: userPhone.value,
+                    userEmail: userEmail.value,
+                    userMessage: userMessage.value,
+                    eventId: eventRegistrationForm.dataset.id
+                };
+                eventRegistrationForm.classList.add('sending');
+
+                fetch('ajax/ajaxFile.php', {
+                    method: 'POST',
+                    body: JSON.stringify(formData),
+                })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Ошибка');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        // Обработка полученных данных
+                        console.log(data);
+                        eventRegistrationForm.classList.remove('sending');
+                        eventRegistrationForm.classList.add('sent');
+                        eventRegistrationForm.reset();
+                    })
+                    .catch(error => {
+                        // Обработка ошибок
+                        console.error('Ошибка:', error);
+                    });
+            })
+        }
+
+
+    </script>
+
     <!-- используется только на главной для анимации людей на первом экране -->
     <script src="vendors/gsap/gsap.min.js"></script>
 
