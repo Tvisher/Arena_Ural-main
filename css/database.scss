@@ -125,6 +125,7 @@
     width: 100%;
   }
   .slider-image-container {
+    display: block;
     background-color: #efefef;
     position: relative;
     height: 0px;
@@ -254,11 +255,13 @@
 }
 
 .database__menu {
+  // overflow: auto;
   background: #f9fafb;
   width: 464px;
   flex-shrink: 0;
   padding: 15px 0;
   .click-plate {
+    display: none;
     cursor: pointer;
     transform: translateX(-41px);
     border: 1px solid #ef723b;
@@ -453,6 +456,7 @@
     width: 100%;
     top: 0;
     border-left: 1px solid #ef723b;
+    overflow: auto;
     &.active {
       transform: translateX(0%);
     }
@@ -461,9 +465,15 @@
     max-width: inherit;
     width: 100%;
   }
+  .click-plate {
+    display: block;
+  }
 }
 
 @media (max-width: 768px) {
+  .has-submenu > ul li {
+    padding-left: 15px !important;
+  }
   .photos_block {
     gap: 20px;
   }

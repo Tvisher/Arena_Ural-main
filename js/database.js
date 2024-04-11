@@ -22,8 +22,8 @@ const galeryBlocks = document.querySelectorAll('.galery-block');
 galeryBlocks.forEach(galeryBlock => {
     const thumbsSliderEl = galeryBlock.querySelector('.thumbs-galery-slider');
     const thumbsSlider = new Swiper(thumbsSliderEl, {
-        spaceBetween: 20,
-        slidesPerView: 'auto',
+        spaceBetween: 10,
+        slidesPerView: 3,
         watchSlidesProgress: true,
         breakpoints: {
             // when window width is >= 640px
@@ -55,6 +55,9 @@ galeryBlocks.forEach(galeryBlock => {
     });
 })
 
+
+
+
 $(document).ready(function () {
     function expandParents(menuItem) {
         const parentMenuItem = menuItem.parent().closest('li.has-submenu');
@@ -84,7 +87,13 @@ $(document).ready(function () {
     // expandParents($('[data-el]'))
     // const parentLi = $('[data-el]').closest('li');
     // $(parentLi).addClass('active');
+
+    Fancybox.bind("[data-fancybox]", {
+        // Your custom options
+    });
 });
+
+
 
 
 document.addEventListener('click', (e) => {
